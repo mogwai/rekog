@@ -2,6 +2,10 @@ require ('dotenv').config();
 const app = require('express')()
 const findceleb = require('./services/findceleb')
 
+app.get('/', (req,res)=>{
+  res.send("HEY!")
+})
+
 app.post('/', require('multer')().single("image"), async (req, res, next) => {
   try {
     let results = await findceleb(req.file.buffer)
