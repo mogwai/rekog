@@ -1,10 +1,11 @@
 {
-  "name": "rekognition test",
+  "name": "rekog-server",
   "version": "1.0.0",
   "description": "",
   "main": "stream.js",
   "scripts": {
-    "start": "node stream.js",
+    "start": "export NODE_PATH=./ && node",
+    "debug": "export NODE_PATH=./ && node --inspect-brk --use-strict ",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "",

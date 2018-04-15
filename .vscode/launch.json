@@ -4,14 +4,14 @@
     {
       "type": "node",
       "request": "launch",
-      "name": "Launch Reckognition Test",
-      "program": "${workspaceFolder}/stream.js"
-    },
-    {
-      "type": "node",
-      "request": "launch",
-      "name": "Start Server",
-      "program": "${workspaceFolder}/index.js"
+      "name": "Launch via NPM",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": [
+        "run-script",
+        "debug",
+        "index.js"
+      ],
+      "port": 9229
     }
   ],
   "compounds": []
