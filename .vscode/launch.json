@@ -9,7 +9,7 @@
       "runtimeArgs": [
         "run-script",
         "debug",
-        "index.js"
+        "src/index.js"
       ],
       "port": 9229
     }

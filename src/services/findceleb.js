@@ -1,5 +1,7 @@
 const AWS = require('aws-sdk');
-AWS.config.loadFromPath('./config.json')
+const path = require('path')
+AWS.config.loadFromPath(path.join(__dirname, 'config.json'))
+
 const rekognition = new AWS.Rekognition({ apiVersion: '2016-06-27' });
 
 module.exports = (buffer) => {

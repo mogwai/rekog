@@ -1,5 +1,5 @@
 const app = require('express')()
-const findceleb = require('./findceleb')
+const findceleb = require('./services/findceleb')
 
 app.post('/', require('multer')().single("image"), async (req, res, next) => {
   try {
