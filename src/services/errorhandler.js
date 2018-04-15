@@ -1,6 +1,6 @@
 
 function errorHandler(req, res, next) {
-  console.log()
+  console.log(arguments)
 }
 
 module.exports = errorHandler
