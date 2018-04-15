@@ -1,33 +1,18 @@
-const express = require('express');
-const bodyParser = require('body-parser');
-const multer = require('multer');
-const pug = require('pug');
-const upload = multer();
-const app = express();
+const app = require('express')()
+const findceleb = require('./findceleb')
 
-// for parsing application/xwww-
-//form-urlencoded
-app.use(bodyParser.urlencoded({ extended: true })); 
-// for parsing application/json
-app.use(bodyParser.json()); 
-// for parsing multipart/form-data
-app.use(upload.array()); 
-app.use(express.static('public'));
-app.set('views', './views');
+app.post('/', require('multer')().single("image"), async (req, res, next) => {
+  try {
+    let results = await findceleb(req.file.buffer)
+    res.json(results)
+  } catch (e) {
+    next(e)
+  }
+})
 
-app.set('view engine', 'pug');
+app.use(require('services/errorhandler'))
 
-app.get('/', function(req, res){
-   res.render('form');
+app.listen(process.env.PORT || 3000, (err) => {
+  console.log(err ? err.message : 'Server is listening to port 3000')
+  if (err) process.exit()
 });
-
-
-app.post('/', function(req, res){
-   console.log(req.body);
-   res.send("recieved your request!");
-});
-
-app.listen(3000, () => {
-    console.log('Server is listening to port 3000')
-});
-
