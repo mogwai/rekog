@@ -1,15 +1,21 @@
-require ('dotenv').config();
+require('dotenv').config();
 const app = require('express')()
 const findceleb = require('./services/findceleb')
 
-app.get('/', (req,res)=>{
+app.get('/', (req, res) => {
   res.send("HEY!")
 })
 
 app.post('/', require('multer')().single("image"), async (req, res, next) => {
   try {
+    console.log("Received Request")
+    if (!req.file) {
+      throw new Error("Missing image")
+    }
     let results = await findceleb(req.file.buffer)
+    console.log("Replying", results)
     res.json(results)
+
   } catch (e) {
     next(e)
   }
