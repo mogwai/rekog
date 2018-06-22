@@ -1,6 +1,4 @@
-const AWS = require("aws-sdk");
-const path = require("path");
-const rekognition = new AWS.Rekognition({ region: "eu-west-1" });
+const rekognition = require("aws-sdk").Rekognition({ region: "eu-west-1" });
 
 module.exports = buffer => {
   return new Promise((res, rej) => {
