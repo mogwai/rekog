@@ -1,4 +1,5 @@
-const rekognition = new require("aws-sdk").Rekognition({ region: "eu-west-1" });
+const AWS = require("aws-sdk");
+const rekognition = new AWS.Rekognition({ region: "eu-west-1" });
 
 module.exports = buffer => {
   return new Promise((res, rej) => {
