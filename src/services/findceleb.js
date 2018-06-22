@@ -1,16 +1,19 @@
-const AWS = require('aws-sdk');
-const path = require('path')
-const rekognition = new AWS.Rekognition({region: 'eu-west-1' });
+const AWS = require("aws-sdk");
+const path = require("path");
+const rekognition = new AWS.Rekognition({ region: "eu-west-1" });
 
-module.exports = (buffer) => {
+module.exports = buffer => {
   return new Promise((res, rej) => {
-    rekognition.recognizeCelebrities({
-      Image: {
-        Bytes: buffer,
+    rekognition.recognizeCelebrities(
+      {
+        Image: {
+          Bytes: buffer
+        }
+      },
+      function(err, data) {
+        if (err) rej(err);
+        else res(data);
       }
-    }, function (err, data) {
-      if (err) rej(err)
-      else res(data)
-    })
-  })
-}
+    );
+  });
+};
