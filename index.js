@@ -1,5 +1,5 @@
+require("dotenv").config();
 const findceleb = require("./services/findceleb");
-const sleep = require("util").promisify(setTimeout);
 const serverless = require("serverless-http");
 const express = require("express");
 const app = express();
@@ -8,19 +8,17 @@ app.get("/", (req, res) => {
   res.send();
 });
 
-app.post("/", async (req, res) => {
+app.post("/", require("multer")().single("image"), async (req, res) => {
   try {
-    console.log(context);
-    const file = Buffer.from(context.body.image, "utf-8");
-    await sleep(2000);
     if (!req.file) throw new Error("Missing image");
-    const results = await findceleb(file);
+    console.log(req.file)
+    const buffer = new Buffer(req.file.buffer,'base64')
+    const results = await findceleb(buffer);
     console.log("Replying", results);
-
-    cb(null, { body: results });
+    res.json(results);
   } catch (e) {
     console.log(e);
-    cb(e);
+    res.send(e.message);
   }
 });
 
