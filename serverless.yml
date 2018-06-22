@@ -28,20 +28,21 @@ provider:
   stage: dev
   region: eu-west-1
 
+
 functions:
   hello:
-    handler: handler.
+    handler: handler.hello
     events:
       - http:
           path: /
           method: get
           cors: true
-  regin:
-    handler: handlers/regin.regin
+  guessImage:
+    handler: handler.guessImage
     events:
       - http:
-          path: /regin
-          method: get
+          path: /
+          method: post
           cors: true
   
       

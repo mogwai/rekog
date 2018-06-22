@@ -6,9 +6,10 @@ module.exports.hello = (context, event, cb) => {
   });
 };
 
-module.exports.guessImage = (context, event, cb) => {
+module.exports.guessImage = async (context, event, cb) => {
   try { 
     console.log("Received Request");
+    console.log(context)
     if (!req.file) throw new Error("Missing image");
     const results = await findceleb(req.file.buffer);
     console.log("Replying", results);
