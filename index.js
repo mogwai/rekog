@@ -11,10 +11,7 @@ app.get("/", (req, res) => {
 app.post("/", require("multer")().single("image"), async (req, res) => {
   try {
     if (!req.file) throw new Error("Missing image");
-    console.log(req.file)
-    const buffer = new Buffer(req.file.buffer,'base64')
-    const results = await findceleb(buffer);
-    console.log("Replying", results);
+    const results = await findceleb(req.file.buffer);
     res.json(results);
   } catch (e) {
     console.log(e);
