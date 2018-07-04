@@ -1,4 +1,5 @@
-const rekognition = require("aws-sdk").Rekognition({ region: "eu-west-1" });
+const { Rekognition } = require("aws-sdk");
+const rekognition = new Rekognition({ region: "eu-west-1" });
 
 module.exports = buffer => {
   return new Promise((res, rej) => {
